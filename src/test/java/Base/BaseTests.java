@@ -7,11 +7,11 @@ import org.junit.jupiter.api.BeforeAll;
 
 public class BaseTests {
 
-    protected static final String BASE_URL = "https://api.trello.com/1/";
-    protected static final String BOARDS = "boards";
-    protected static final String LISTS = "lists";
-    protected static final String CARDS = "cards";
-    protected static final String ORGANIZATIONS = "organizations";
+    protected final String BASE_URL = "https://api.trello.com/1/";
+    protected final String BOARDS = "boards";
+    protected final String LISTS = "lists";
+    protected final String CARDS = "cards";
+    protected final String ORGANIZATIONS = "organizations";
 
     protected static final String KEY = "KEY";
     protected static final String TOKEN = "TOKEN";

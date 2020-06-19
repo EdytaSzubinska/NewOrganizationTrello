@@ -22,7 +22,7 @@ public class CreateOrganization extends BaseTests {
     }
 
     @BeforeEach
-    public void beforeEach(){
+    public void beforeEach() {
         faker = new Faker();
         displayName = faker.name().title();
         website = faker.internet().url();
@@ -55,11 +55,11 @@ public class CreateOrganization extends BaseTests {
     }
 
     @Test
-    public void createOrganizationsWithEmptyDisplayName(){
+    public void createOrganizationsWithEmptyDisplayName() {
 
         Response response = given()
                 .spec(reqSpec)
-                .queryParam("displayName","")
+                .queryParam("displayName", "")
                 .when()
                 .post(BASE_URL + ORGANIZATIONS)
                 .then()
@@ -99,7 +99,7 @@ public class CreateOrganization extends BaseTests {
     }
 
     @Test
-    public void createOrganizationWithWebsite(){
+    public void createOrganizationWithWebsite() {
 
         Response response = given()
                 .spec(reqSpec)

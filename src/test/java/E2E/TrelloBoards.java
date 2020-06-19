@@ -4,6 +4,7 @@ import Base.BaseTests;
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
 import org.apache.http.HttpStatus;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -12,6 +13,17 @@ import static io.restassured.RestAssured.given;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class TrelloBoards extends BaseTests {
+
+    @AfterEach
+    public void afterEach() {
+        String boardId = json.get("id");
+        given()
+                .spec(reqSpec)
+                .when()
+                .delete(BASE_URL + BOARDS + "/" + boardId)
+                .then()
+                .statusCode(HttpStatus.SC_OK);
+    }
 
     @Test
     public void createNewBoard() {
@@ -29,18 +41,10 @@ public class TrelloBoards extends BaseTests {
         JsonPath json = response.jsonPath();
 //      assertEquals("My third board", json.get("name"));
         assertThat(json.getString("name")).isEqualTo("New boards");
-
-        String boardId = json.get("id");
-        given()
-                .spec(reqSpec)
-                .when()
-                .delete(BASE_URL + BOARDS + "/" + boardId)
-                .then()
-                .statusCode(HttpStatus.SC_OK);
     }
 
     @Test
-    public void createBoardWithEmptyBoardName(){
+    public void createBoardWithEmptyBoardName() {
 
         Response response = given()
                 .spec(reqSpec)
@@ -87,13 +91,6 @@ public class TrelloBoards extends BaseTests {
 //      assertEquals(0, idList.size());
         assertThat(idList).hasSize(0);
         //System.out.println(response.asString());
-
-        given()
-                .spec(reqSpec)
-                .when()
-                .delete(BASE_URL + BOARDS + "/" + boardId)
-                .then()
-                .statusCode(HttpStatus.SC_OK);
     }
 
     @Test
@@ -130,12 +127,5 @@ public class TrelloBoards extends BaseTests {
 
         List<String> nameList = jsonGet.getList("name");
         assertThat(nameList).hasSize(3).contains("Do zrobienia", "W trakcie", "Zrobione");
-
-        given()
-                .spec(reqSpec)
-                .when()
-                .delete(BASE_URL + BOARDS + "/" + boardId)
-                .then()
-                .statusCode(HttpStatus.SC_OK);
     }
 }

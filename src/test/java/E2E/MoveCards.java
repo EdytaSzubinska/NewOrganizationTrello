@@ -15,14 +15,14 @@ import static org.assertj.core.api.Assertions.assertThat;
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class MoveCards extends BaseTests {
 
-    private static String boardId;
-    private static String firstListId;
-    private static String secondListId;
-    private static String cardId;
+    private String boardId;
+    private String firstListId;
+    private String secondListId;
+    private String cardId;
 
     @Test
     @Order(1)
-    public void createNewBoard(){
+    public void createNewBoard() {
         Response response = given()
                 .spec(reqSpec)
                 .queryParam("name", "E2E board")
@@ -38,11 +38,11 @@ public class MoveCards extends BaseTests {
         assertThat(json.getString("name")).isEqualTo("E2E board");
 
         boardId = json.getString("id");
-        }
+    }
 
     @Test
     @Order(2)
-    public void createFirstList(){
+    public void createFirstList() {
 
         Response response = given()
                 .spec(reqSpec)
@@ -58,11 +58,11 @@ public class MoveCards extends BaseTests {
         JsonPath json = response.jsonPath();
         assertThat(json.getString("name")).isEqualTo("First list");
         firstListId = json.getString("id");
-        }
+    }
 
     @Test
     @Order(3)
-    public void createSecondList(){
+    public void createSecondList() {
 
         Response response = given()
                 .spec(reqSpec)
@@ -78,11 +78,11 @@ public class MoveCards extends BaseTests {
         JsonPath json = response.jsonPath();
         assertThat(json.getString("name")).isEqualTo("Second list");
         secondListId = json.getString("id");
-        }
+    }
 
     @Test
     @Order(4)
-    public void addCardToFirstList(){
+    public void addCardToFirstList() {
 
         Response response = given()
                 .spec(reqSpec)
@@ -99,11 +99,11 @@ public class MoveCards extends BaseTests {
         assertThat(json.getString("name")).isEqualTo("E2E card");
 
         cardId = json.getString("id");
-        }
+    }
 
     @Test
     @Order(5)
-    public void moveCardsToSecondList(){
+    public void moveCardsToSecondList() {
 
         Response response = given()
                 .spec(reqSpec)
@@ -117,11 +117,11 @@ public class MoveCards extends BaseTests {
 
         JsonPath json = response.jsonPath();
         assertThat(json.getString("idList")).isEqualTo(secondListId);
-        }
+    }
 
     @Test
     @Order(6)
-    public void deleteBoard(){
+    public void deleteBoard() {
 
         given()
                 .spec(reqSpec)
@@ -130,5 +130,5 @@ public class MoveCards extends BaseTests {
                 .then()
                 .statusCode(HttpStatus.SC_OK);
     }
- }
+}
 
