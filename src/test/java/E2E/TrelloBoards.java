@@ -4,7 +4,6 @@ import Base.BaseTests;
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
 import org.apache.http.HttpStatus;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -13,17 +12,6 @@ import static io.restassured.RestAssured.given;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class TrelloBoards extends BaseTests {
-
-    @AfterEach
-    public void afterEach() {
-        String boardId = json.get("id");
-        given()
-                .spec(reqSpec)
-                .when()
-                .delete(BASE_URL + BOARDS + "/" + boardId)
-                .then()
-                .statusCode(HttpStatus.SC_OK);
-    }
 
     @Test
     public void createNewBoard() {

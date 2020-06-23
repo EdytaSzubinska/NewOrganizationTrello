@@ -3,11 +3,14 @@ package Base;
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.http.ContentType;
 import io.restassured.specification.RequestSpecification;
+import org.apache.http.HttpStatus;
 import org.junit.jupiter.api.BeforeAll;
+
+import static io.restassured.RestAssured.given;
 
 public class BaseTests {
 
-    protected final String BASE_URL = "https://api.trello.com/1/";
+    protected static final String BASE_URL = "https://api.trello.com/1/";
     protected final String BOARDS = "boards";
     protected final String LISTS = "lists";
     protected final String CARDS = "cards";
@@ -18,6 +21,14 @@ public class BaseTests {
 
     protected static RequestSpecBuilder reqBuilder;
     protected static RequestSpecification reqSpec;
+
+    public static void deleteResource(final String endpoint,String resourceId){
+        given()
+                .spec(reqSpec)
+                .when()
+                .delete(BASE_URL + endpoint + "/" + resourceId)
+                .then()
+                .statusCode(HttpStatus.SC_OK);
 
     @BeforeAll
     public static void beforeAll() {

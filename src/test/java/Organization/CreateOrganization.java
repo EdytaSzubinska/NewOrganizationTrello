@@ -89,13 +89,7 @@ public class CreateOrganization extends BaseTests {
         JsonPath json = response.jsonPath();
         assertThat(json.getString("displayName")).isEqualTo(displayName);
 
-        String organizationId = json.get("id");
-        given()
-                .spec(reqSpec)
-                .when()
-                .delete(BASE_URL + ORGANIZATIONS + "/" + organizationId)
-                .then()
-                .statusCode(HttpStatus.SC_OK);
+        deleteResource(BOARDS, json.getString("id"));
     }
 
     @Test
@@ -115,13 +109,7 @@ public class CreateOrganization extends BaseTests {
         JsonPath json = response.jsonPath();
         assertThat(json.getString("website")).contains(website);
 
-        String organizationId = json.get("id");
-        given()
-                .spec(reqSpec)
-                .when()
-                .delete(BASE_URL + ORGANIZATIONS + "/" + organizationId)
-                .then()
-                .statusCode(HttpStatus.SC_OK);
+        deleteResource(BOARDS, json.getString("id"));
     }
 
     @Test
@@ -141,13 +129,7 @@ public class CreateOrganization extends BaseTests {
         JsonPath json = response.jsonPath();
         assertThat(json.getString("displayName")).isEqualTo(displayName);
 
-        String organizationId = json.get("id");
-        given()
-                .spec(reqSpec)
-                .when()
-                .delete(BASE_URL + ORGANIZATIONS + "/" + organizationId)
-                .then()
-                .statusCode(HttpStatus.SC_OK);
+        deleteResource(BOARDS, json.getString("id"));
     }
 }
 
